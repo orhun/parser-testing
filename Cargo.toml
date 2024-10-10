@@ -1,0 +1,9 @@
+[package]
+name = "parser-tester"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+chumsky = "1.0.0-alpha.7"
+flate2 = "1"
