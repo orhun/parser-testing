@@ -105,6 +105,7 @@ fn parser<'a>() -> impl Parser<'a, &'a str, Vec<Statement<'a>>, extra::Err<Rich<
 
     // Parser for the default properties behind a `/set` or `/unset` command
     let default_properties = choice((
+        // `uid` and `gid` parser that expect a user/group id.
         ascii::keyword("uid")
             .then(just('='))
             .ignore_then(text::digits(10).to_slice())
@@ -113,10 +114,12 @@ fn parser<'a>() -> impl Parser<'a, &'a str, Vec<Statement<'a>>, extra::Err<Rich<
             .then(just('='))
             .ignore_then(text::digits(10).to_slice())
             .map(|s: &str| DefaultProperty::Gid(s.parse().unwrap())),
+        // `mode` parser which expects some octal digits
         ascii::keyword("mode")
             .then(just('='))
             .ignore_then(text::digits(8).to_slice())
             .map(|s: &str| DefaultProperty::Mode(s)),
+        // `type` parser which can be one of `file`, `dir` or `link`.
         ascii::keyword("type")
             .then(just('='))
             .ignore_then(choice((
@@ -146,24 +149,31 @@ fn parser<'a>() -> impl Parser<'a, &'a str, Vec<Statement<'a>>, extra::Err<Rich<
 
     // Parser for the properties behind a path line
     let properties = choice((
+        // `mode` parser which expects some octal digits
         ascii::keyword("mode")
             .then(just('='))
             .ignore_then(text::digits(8).to_slice())
             .map(|s: &str| Property::Mode(s)),
+        // `Sha256Digest` parser which expects a hex digest
         ascii::keyword("sha256digest")
             .then(just('='))
             .ignore_then(text::digits(16).to_slice())
             .map(|s: &str| Property::Sha256Digest(s)),
+        // `size` parser which expects a decimal filesize in bytes
         ascii::keyword("size")
             .then(just('='))
             .ignore_then(text::digits(10).to_slice())
             .map(|s: &str| Property::Size(s.parse().unwrap())),
+        // `time` parser which expects a decimal epoch.
+        // For some reason, this is a floating point number.
+        // We just ignore any decimal places
         ascii::keyword("time")
             .then(just('='))
             .ignore_then(text::digits(10).to_slice())
             .then_ignore(just('.'))
-            .then_ignore(just('0'))
+            .then_ignore(text::digits(10))
             .map(|s: &str| Property::Time(s.parse().unwrap())),
+        // `type` parser which can be one of `file`, `dir` or `link`.
         ascii::keyword("type")
             .then(just('='))
             .ignore_then(choice((
@@ -172,6 +182,7 @@ fn parser<'a>() -> impl Parser<'a, &'a str, Vec<Statement<'a>>, extra::Err<Rich<
                 ascii::keyword("link").to(PathType::Link),
             )))
             .map(Property::Type),
+        // `link` parser, which defines what a link links to.
         ascii::keyword("link")
             .then(just('='))
             .ignore_then(none_of(" ").repeated().to_slice())
