@@ -35,7 +35,7 @@ enum DefaultProperty<'a> {
     Type(PathType),
 }
 
-/// This type is used in `/set` and `/unset` commands to modify the currently active defaults.
+/// This type is used in a [Path] line and defines some available properties for that path.
 #[derive(Debug, Clone)]
 enum Property<'a> {
     Mode(&'a str),
