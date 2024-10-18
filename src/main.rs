@@ -10,8 +10,54 @@ use chumsky::{prelude::*, text::ascii, Parser};
 use flate2::read::GzDecoder;
 use text::newline;
 
+/// Each line represents a line in a .MTREE file
+#[derive(Debug, Clone)]
+enum Statement<'a> {
+    /// The initial `#mtree` line at the top of the file
+    Init,
+    /// A `/set` command followed by some properties
+    Set(Vec<DefaultProperty<'a>>),
+    /// A `/unset` command followed by some properties
+    Unset(Vec<DefaultProperty<'a>>),
+    /// Any path statement followed by some properties
+    Path {
+        path: &'a str,
+        properties: Vec<Property<'a>>,
+    },
+}
+
+/// This type is used in `/set` and `/unset` commands to modify the currently active defaults.
+#[derive(Debug, Clone)]
+enum DefaultProperty<'a> {
+    Uid(usize),
+    Gid(usize),
+    Mode(&'a str),
+    Type(PathType),
+}
+
+/// This type is used in `/set` and `/unset` commands to modify the currently active defaults.
+#[derive(Debug, Clone)]
+enum Property<'a> {
+    Mode(&'a str),
+    Type(PathType),
+    Size(usize),
+    Link(&'a str),
+    Sha256Digest(&'a str),
+    Time(usize),
+}
+
+// What kind of type is a path.
+#[derive(Debug, Clone, Copy)]
+enum PathType {
+    Dir,
+    File,
+    Link,
+}
+
 fn main() -> Result<()> {
     let compressed = false;
+    // Either read the compressed or already uncompressed .MTREE file at the root of this
+    // repo and return the contents.
     let content = if compressed {
         let gz_content = fs::read(".MTREE")?;
         let mut decoder = GzDecoder::new(gz_content.as_slice());
@@ -25,8 +71,13 @@ fn main() -> Result<()> {
 
     //println!("{}", content);
 
+    // Parse the file
     let (ast, errs) = parser().parse(content.trim()).into_output_errors();
+
+    // Print out the AST
     println!("{:#?}", ast);
+
+    // Print out any errors.
     errs.into_iter().for_each(|e| {
         Report::build(ReportKind::Error, (), e.span().start)
             .with_message(e.to_string())
@@ -46,11 +97,13 @@ fn main() -> Result<()> {
 fn parser<'a>() -> impl Parser<'a, &'a str, Vec<Statement<'a>>, extra::Err<Rich<'a, char>>> {
     use Statement::*;
 
+    // Parser for the very first line of the `.MTREE` file
     let mtree = just("#")
         .then(ascii::keyword("mtree"))
         .then_ignore(newline())
         .to(Init);
 
+    // Parser for the default properties behind a `/set` or `/unset` command
     let default_properties = choice((
         ascii::keyword("uid")
             .then(just('='))
@@ -77,16 +130,21 @@ fn parser<'a>() -> impl Parser<'a, &'a str, Vec<Statement<'a>>, extra::Err<Rich<
     .repeated()
     .collect::<Vec<_>>();
 
+    // The `/set` parser
+    // Afterwards follows a whitespace delimited list of properties.
     let set = just("/")
         .then(ascii::keyword("set"))
         .ignore_then(default_properties)
         .map(Set);
 
+    // The `/unset` parser
+    // Afterwards follows a whitespace delimited list of properties.
     let unset = just("/")
         .ignored()
         .then_ignore(ascii::keyword("unset"))
         .to(Unset(Vec::new()));
 
+    // Parser for the properties behind a path line
     let properties = choice((
         ascii::keyword("mode")
             .then(just('='))
@@ -123,51 +181,15 @@ fn parser<'a>() -> impl Parser<'a, &'a str, Vec<Statement<'a>>, extra::Err<Rich<
     .repeated()
     .collect::<Vec<_>>();
 
+    // Parse a path line.
+    // It starts with a `.` followed by some text, delimited by a whitespace.
+    // TODO: Theoretically whitespaces could be inside the path?
+    // Afterwards follows a whitespace delimited list of properties.
     let path = just(".")
         .then(none_of(" ").repeated().to_slice())
         .to_slice()
         .then(properties)
         .map(|(path, properties)| Path { path, properties });
 
-    recursive(|raw| choice((mtree, set, unset, path)).repeated().collect())
-}
-
-#[derive(Debug, Clone)]
-enum Statement<'a> {
-    // The initial `#mtree` line at the top of the file
-    Init,
-    Set(Vec<DefaultProperty<'a>>),
-    Unset(Vec<DefaultProperty<'a>>),
-    Path {
-        path: &'a str,
-        properties: Vec<Property<'a>>,
-    },
-}
-
-/// This type is used in `/set` and `/unset` commands to modify the currently active defaults.
-#[derive(Debug, Clone)]
-enum DefaultProperty<'a> {
-    Uid(usize),
-    Gid(usize),
-    Mode(&'a str),
-    Type(PathType),
-}
-
-/// This type is used in `/set` and `/unset` commands to modify the currently active defaults.
-#[derive(Debug, Clone)]
-enum Property<'a> {
-    Mode(&'a str),
-    Type(PathType),
-    Size(usize),
-    Link(&'a str),
-    Sha256Digest(&'a str),
-    Time(usize),
-}
-
-// What kind of type is a path.
-#[derive(Debug, Clone, Copy)]
-enum PathType {
-    Dir,
-    File,
-    Link,
+    recursive(|_| choice((mtree, set, unset, path)).repeated().collect())
 }
