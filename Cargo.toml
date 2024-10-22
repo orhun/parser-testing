@@ -1,0 +1,16 @@
+[package]
+name = "serde-archlinux"
+version = "0.2.0"
+
+description = "Arch linux ini-style file de-/serialization"
+keywords = ["Arch Linux", "buildinfo"]
+
+repository = "http://github.com/nukesor/serde-archlinux"
+readme = "README.md"
+license = "MIT"
+edition = "2021"
+
+[dependencies]
+result = "1"
+serde = { version = "1", features = ["derive"] }
+void = "^1"
