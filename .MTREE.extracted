@@ -1,0 +1,74 @@
+#mtree
+/set type=file uid=0 gid=0 mode=644
+./.BUILDINFO time=1713013871.0 size=10309 sha256digest=45f637b00c8d265b3682d78ab7750abc157badfce5bcd3429abc746d10289826
+./.PKGINFO time=1713013871.0 size=871 sha256digest=1006d02e94e3c719ff41a987d2666626b0f98cf5ad61e5d7b9bed11c25ddf697
+/set mode=755
+./usr time=1713013871.0 type=dir
+./usr/bin time=1713013871.0 type=dir
+./usr/bin/zbarcam time=1713013871.0 size=18448 sha256digest=f8466bd2d7b76c589d7810b0b5193a8a04dde53151688f0700549a4112d140f6
+./usr/bin/zbarcam-gtk time=1713013871.0 size=18448 sha256digest=c8518f565eb23a1a3aceb6a2006fadb49bdb902e549db69ec95319499efe82f6
+./usr/bin/zbarcam-qt time=1713013871.0 size=104720 sha256digest=288296dddfe1ce7343f6ee6d5a15aeeff3661295c7961e71a276d5b77bb85c39
+./usr/bin/zbarimg time=1713013871.0 size=22544 sha256digest=f889523570db0faff54bc837d60949690581ae13ab7edd08dd1776a0949e7376
+./usr/include time=1713013871.0 type=dir
+./usr/include/zbar.h time=1713013871.0 mode=644 size=54491 sha256digest=f54beee3cb435d16b76cf28863e7d4df153fc3679b48c8f591e111b8e4ac55fc
+/set mode=644
+./usr/include/zbar time=1713013871.0 mode=755 type=dir
+./usr/include/zbar/Decoder.h time=1713013871.0 size=5448 sha256digest=cd92a8c3e391100452e461143a137b35272d4cc0d6ad807a6e0b2071b4b7a50d
+./usr/include/zbar/Exception.h time=1713013871.0 size=4495 sha256digest=08ae8813237ca6da861b1083b92c77abbde0aa4918fcf51a3716208dcfbb3852
+./usr/include/zbar/Image.h time=1713013871.0 size=7985 sha256digest=3cbb636fe96af7cd090ab42307f6fe5431bab1fb61a07c8cb6a8c4cbeff2703b
+./usr/include/zbar/ImageScanner.h time=1713013871.0 size=4136 sha256digest=843ace23926e3e54379cfa091b219fe38061ace8c496ae8a386f165ff47d4051
+./usr/include/zbar/Processor.h time=1713013871.0 size=6519 sha256digest=edcd9997d4f79353e33868cfa92591aff9c30686a283f61a696e0d849be0647c
+./usr/include/zbar/QZBar.h time=1713013871.0 size=6298 sha256digest=65acd707cc1cd1a035f5ad1d0ec26a63e6276ff86f6def462abca44255a3dcd7
+./usr/include/zbar/QZBarImage.h time=1713013871.0 size=2246 sha256digest=a3a0f3c03e30247351020293617e5b50f47ff1af66b9376160c72f12bb907848
+./usr/include/zbar/Scanner.h time=1713013871.0 size=4040 sha256digest=081508804a7413ac698e462eb31a48a720f125502be45ac90e6f92bf52af936d
+./usr/include/zbar/Symbol.h time=1713013871.0 size=11285 sha256digest=a5a89ae907d5978fe3992fcd46967a903eb859177f8d78e0b38014774afd18fa
+./usr/include/zbar/Video.h time=1713013871.0 size=5680 sha256digest=9d5aad8d5493657a7318bf4eac001c34c334e13bd816b3cf83190f436ad8e918
+./usr/include/zbar/Window.h time=1713013871.0 size=3555 sha256digest=3ffc8a4a3184dd1f9fa6ab5dd9ec401ff8198a57b84d3c07e0490cc766905bdc
+./usr/include/zbar/zbargtk.h time=1713013871.0 size=7370 sha256digest=eb53214a4c6455029990312fabc046c6fe05e9a8a83049aefe3b4d4c6ff120a5
+/set mode=777
+./usr/lib time=1713013871.0 mode=755 type=dir
+./usr/lib/libzbar.so time=1713013871.0 type=link link=libzbar.so.0.3.0
+./usr/lib/libzbar.so.0 time=1713013871.0 type=link link=libzbar.so.0.3.0
+./usr/lib/libzbar.so.0.3.0 time=1713013871.0 mode=755 size=239760 sha256digest=6fc9dc5dacc4211af218e69970be144d4025e2eda1786648f453dc66e4b04936
+./usr/lib/libzbargtk.so time=1713013871.0 type=link link=libzbargtk.so.0.0.2
+./usr/lib/libzbargtk.so.0 time=1713013871.0 type=link link=libzbargtk.so.0.0.2
+./usr/lib/libzbargtk.so.0.0.2 time=1713013871.0 mode=755 size=30664 sha256digest=dfcd671b492232c100399d9a71d9bd859850cad85905e67f822f4209d77298a3
+./usr/lib/libzbarqt.so time=1713013871.0 type=link link=libzbarqt.so.0.1.2
+./usr/lib/libzbarqt.so.0 time=1713013871.0 type=link link=libzbarqt.so.0.1.2
+./usr/lib/libzbarqt.so.0.1.2 time=1713013871.0 mode=755 size=84104 sha256digest=e0987f92b4a303699906fb838ae5bd46d9d316546d888777e06d40d566113ddb
+./usr/lib/girepository-1.0 time=1713013871.0 mode=755 type=dir
+./usr/lib/girepository-1.0/ZBar-1.0.typelib time=1713013871.0 mode=644 size=2000 sha256digest=c2bf79e4a70e410618336b5e7b19bfe677d8dcc95d890dd8c8ae89412ffd9198
+/set mode=644
+./usr/lib/pkgconfig time=1713013871.0 mode=755 type=dir
+./usr/lib/pkgconfig/zbar-gtk.pc time=1713013871.0 size=300 sha256digest=111ed53b062af04352647749ea8e97808b87b1030fd2c2c820981c2cd0a1e04f
+./usr/lib/pkgconfig/zbar-qt.pc time=1713013871.0 size=302 sha256digest=1a519df3f3f28ce00186868c41a1be54f0e1de11521a52ba19d4e99059995efa
+./usr/lib/pkgconfig/zbar.pc time=1713013871.0 size=244 sha256digest=a56dc91ba5305aa543f669c1f34a9e9bb0c118c3b7d43128101bdceced8ee7a1
+./usr/lib/python3.12 time=1713013871.0 mode=755 type=dir
+./usr/lib/python3.12/site-packages time=1713013871.0 mode=755 type=dir
+./usr/lib/python3.12/site-packages/zbar.so time=1713013871.0 mode=755 size=51384 sha256digest=f7509a0e73c9cfe25d857f5092d2012c4774b433abba6abc7fad91e0b068e917
+/set mode=755
+./usr/share time=1713013871.0 type=dir
+./usr/share/dbus-1 time=1713013871.0 type=dir
+./usr/share/dbus-1/system.d time=1713013871.0 type=dir
+./usr/share/dbus-1/system.d/org.linuxtv.Zbar.conf time=1713013871.0 mode=644 size=655 sha256digest=268423baae540f75abe4a8a5ce16fee29335cf6aa9b5f8d68f13d647da1e1e74
+./usr/share/doc time=1713013871.0 type=dir
+/set mode=644
+./usr/share/doc/zbar time=1713013871.0 mode=755 type=dir
+./usr/share/doc/zbar/ABOUT-NLS time=1713013871.0 size=67 sha256digest=fbe8681a07eab3934d302edb4db8fbcea014b460232e3638e7f4cdb7da53e5aa
+./usr/share/doc/zbar/COPYING time=1713013871.0 size=1279 sha256digest=c635190c86f74415ba2170ced60caf1260c563a65a3f716d4b1c17326f66e216
+./usr/share/doc/zbar/HACKING.md time=1713013871.0 size=2936 sha256digest=7828ebabce3e07c10497b66e9c90d799e4ac5f9db64f967ca1e90ece5deb682a
+./usr/share/doc/zbar/INSTALL.md time=1713013871.0 size=8348 sha256digest=621dc517de23f141545601b9f8b8f5ee4325be00f44e3a9a302f4485037073c4
+./usr/share/doc/zbar/LICENSE.md time=1713013871.0 size=26334 sha256digest=44260f9252c7fe38ba8dfb645330504f4a375e3a5e9dd7d5d6b9f04adb4952f1
+./usr/share/doc/zbar/NEWS.md time=1713013871.0 size=6164 sha256digest=a864c7fe284a83f9f32197372e61e87d196e9f27e7f24c3e54cc7a4a670e50bc
+./usr/share/doc/zbar/README.md time=1713013871.0 size=7380 sha256digest=a27ad71666eb5893feb8c5acd0aca21ddee2bfcdf0f733da90713c4033a44b38
+./usr/share/doc/zbar/TODO.md time=1713013871.0 size=2148 sha256digest=45f4e3d449d75ff9cdde38cd0e4d0fe32378f63d98007b38fca10d69d1f357bb
+./usr/share/gir-1.0 time=1713013871.0 mode=755 type=dir
+./usr/share/gir-1.0/ZBar-1.0.gir time=1713013871.0 size=20864 sha256digest=2fec43d49a5994130715ed9f41b2011667f83d3e8ea0e667cd9b33a998dfabb6
+./usr/share/locale time=1713013871.0 mode=755 type=dir
+./usr/share/locale/pt_BR time=1713013871.0 mode=755 type=dir
+./usr/share/locale/pt_BR/LC_MESSAGES time=1713013871.0 mode=755 type=dir
+./usr/share/locale/pt_BR/LC_MESSAGES/zbar.mo time=1713013871.0 size=4563 sha256digest=6222c98bd00ab7f1de26fd4c4a46c3afdb14d7552554a301e547084160b8543c
+./usr/share/man time=1713013871.0 mode=755 type=dir
+./usr/share/man/man1 time=1713013871.0 mode=755 type=dir
+./usr/share/man/man1/zbarcam.1.gz time=1713013871.0 size=3479 sha256digest=9ff3ed2d6fd1be37ffdbed5458574cdc1c5bdc82dfa1fbf4370309826ab2f5ec
+./usr/share/man/man1/zbarimg.1.gz time=1713013871.0 size=3816 sha256digest=e93b6ef10c4636cdebdb5dcc22e9d71aca1b14e659e23837f8e05293d6a1a7d0

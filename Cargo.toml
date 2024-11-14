@@ -5,5 +5,5 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1"
-chumsky = "1.0.0-alpha.7"
 flate2 = "1"
+winnow = "0.6"
