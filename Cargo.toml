@@ -8,3 +8,4 @@ anyhow = "1"
 ariadne = "0.4"
 chumsky = "1.0.0-alpha.7"
 flate2 = "1"
+winnow = { version = "0.6.20", features = ["debug"] }
